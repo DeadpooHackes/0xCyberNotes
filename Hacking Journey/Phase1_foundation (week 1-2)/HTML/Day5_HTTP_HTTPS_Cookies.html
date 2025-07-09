@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Day5_HTTP_HTTPS_Cookies.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%93%98-day-5-http-https-cookies-%E2%80%93-full-explanation-hindi--english">📘 Day 5: HTTP, HTTPS, Cookies – Full Explanation (Hindi + English)</h1>
+<h2 id="%F0%9F%94%B5-1-http-hypertext-transfer-protocol">🔵 1. HTTP (Hypertext Transfer Protocol)</h2>
+<h3 id="%F0%9F%94%B9-%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE-%E0%A4%B9%E0%A5%88">🔹 क्या है?</h3>
+<p>HTTP एक request-response protocol है जो web browser (client) और web server के बीच डेटा भेजने के लिए इस्तेमाल होता है।</p>
+<h3 id="%F0%9F%94%B9-%E0%A4%95%E0%A5%88%E0%A4%B8%E0%A5%87-%E0%A4%95%E0%A4%BE%E0%A4%AE-%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A4%BE-%E0%A4%B9%E0%A5%88">🔹 कैसे काम करता है?</h3>
+<p>जब आप किसी वेबसाइट पर जाते हैं (http://example.com)</p>
+<ul>
+<li>आपका browser HTTP request भेजता है</li>
+<li>Server उसे process करता है और HTTP response भेजता है (HTML, images, etc)</li>
+</ul>
+<h3 id="%F0%9F%94%B9-example">🔹 Example:</h3>
+<pre class="hljs"><code><div>GET /index.html HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0
+</div></code></pre>
+<p><strong>Server से response:</strong></p>
+<pre class="hljs"><code><div>HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1234
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-ethical-hacking-%E0%A4%AE%E0%A5%87%E0%A4%82-%E0%A4%89%E0%A4%AA%E0%A4%AF%E0%A5%8B%E0%A4%97">🔹 Ethical Hacking में उपयोग:</h3>
+<ul>
+<li>Packet sniffing: HTTP data plaintext में होता है – Wireshark, tcpdump से capture किया जा सकता है</li>
+<li>Login credentials capture: अगर HTTP पर login हो रहा है, तो credentials network में दिख जाते हैं</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%9F%A2-2-https-http-secure">🟢 2. HTTPS (HTTP Secure)</h2>
+<h3 id="%F0%9F%94%B9-%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE-%E0%A4%B9%E0%A5%88">🔹 क्या है?</h3>
+<p>HTTPS = HTTP + SSL/TLS — यह encryption provide करता है जिससे data secure रहता है।</p>
+<h3 id="%F0%9F%94%B9-%E0%A4%95%E0%A5%88%E0%A4%B8%E0%A5%87-%E0%A4%95%E0%A4%BE%E0%A4%AE-%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A4%BE-%E0%A4%B9%E0%A5%88">🔹 कैसे काम करता है?</h3>
+<ul>
+<li>SSL Certificate install होता है server पर</li>
+<li>Browser और server SSL handshake करके data encrypt करते हैं</li>
+<li>कोई attacker बीच में data नहीं पढ़ सकता (Man-in-the-middle attack fail)</li>
+</ul>
+<h3 id="%F0%9F%94%B9-url">🔹 URL:</h3>
+<pre class="hljs"><code><div>https://example.com
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-ethical-hacking-%E0%A4%AE%E0%A5%87%E0%A4%82-%E0%A4%89%E0%A4%AA%E0%A4%AF%E0%A5%8B%E0%A4%97">🔹 Ethical Hacking में उपयोग:</h3>
+<ul>
+<li>HTTPS encrypt करता है data, इसलिए attacker को sniffing में सिर्फ encrypted data मिलेगा</li>
+<li>HTTPS को bypass करने के लिए attacker को MITM setup, custom certificate, या proxy (Burp CA install) करना पड़ता है</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%91-3-http-methods-web-actions">📑 3. HTTP Methods (Web Actions)</h2>
+<h3 id="%F0%9F%94%B9-common-methods">🔹 Common Methods:</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Use</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>Page retrieve</td>
+<td>Search, image fetch</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>Form submit</td>
+<td>Login, Signup</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>Update data</td>
+<td>API update</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>Delete data</td>
+<td>API delete</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>Check available methods</td>
+<td>Preflight check</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%F0%9F%94%B9-example-%E2%80%93-login-post-request">🔹 Example – Login POST Request:</h3>
+<pre class="hljs"><code><div>POST /login.php HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&amp;password=admin123
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-ethical-hacking-%E0%A4%AE%E0%A5%87%E0%A4%82-%E0%A4%89%E0%A4%AA%E0%A4%AF%E0%A5%8B%E0%A4%97">🔹 Ethical Hacking में उपयोग:</h3>
+<ul>
+<li>Burp Suite से request capture करके data modify किया जाता है</li>
+<li>XSS, SQLi attacks POST/GET में embedded होते हैं</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%8D%AA-4-cookies-client-side-storage">🍪 4. Cookies (Client-side storage)</h2>
+<h3 id="%F0%9F%94%B9-%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE-%E0%A4%B9%E0%A5%88">🔹 क्या है?</h3>
+<p>Cookie एक छोटी सी data file होती है जो browser के अंदर store होती है।</p>
+<h3 id="%F0%9F%94%B9-use">🔹 Use:</h3>
+<ul>
+<li>Login session maintain करना</li>
+<li>User preference save करना</li>
+<li>Tracking और analytics</li>
+</ul>
+<h3 id="%F0%9F%94%B9-set-cookie-example-from-server-to-client">🔹 Set-Cookie Example (from Server to Client):</h3>
+<pre class="hljs"><code><div>Set-Cookie: session_id=abc123; HttpOnly; Secure; Path=/; Expires=Wed, 10 Jul 2025 12:00:00 GMT
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-browser-%E0%A4%B8%E0%A5%87-%E0%A4%A6%E0%A4%BF%E0%A4%96%E0%A4%A8%E0%A4%BE">🔹 Browser से दिखना:</h3>
+<p>F12 (Dev Tools) → Application Tab → Cookies section</p>
+<h3 id="%F0%9F%94%B9-ethical-hacking-%E0%A4%AE%E0%A5%87%E0%A4%82-%E0%A4%89%E0%A4%AA%E0%A4%AF%E0%A5%8B%E0%A4%97">🔹 Ethical Hacking में उपयोग:</h3>
+<ul>
+<li>Cookie theft: अगर XSS मिला तो document.cookie से cookie चुरा सकते हैं</li>
+<li>Session Hijacking: अगर attacker को session_id मिल जाए तो वो उसी user के रूप में act कर सकता है</li>
+<li>Insecure Cookies: अगर cookies पर Secure और HttpOnly flags नहीं लगे तो attacker उसे intercept कर सकता है</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%94%90-5-cookie-flags">🔐 5. Cookie Flags</h2>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Secure</td>
+<td>केवल HTTPS पर भेजी जाती है</td>
+</tr>
+<tr>
+<td>HttpOnly</td>
+<td>JavaScript access नहीं कर सकता</td>
+</tr>
+<tr>
+<td>SameSite=Strict</td>
+<td>Cross-site request नहीं होती</td>
+</tr>
+<tr>
+<td>Expires</td>
+<td>Expiry date set करता है</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%8E%AF-6-practical-examples-you-should-try">🎯 6. Practical Examples You Should Try</h2>
+<h3 id="%F0%9F%93%8C-using-dev-tools">📌 Using Dev Tools:</h3>
+<ol>
+<li>Visit http://testphp.vulnweb.com</li>
+<li>Open Developer Tools → Network → Refresh the page</li>
+<li>Click on any request:
+<ul>
+<li>Check Method (GET/POST)</li>
+<li>Check Headers (Cookies, Host, User-Agent)</li>
+<li>Check Response (Set-Cookie)</li>
+</ul>
+</li>
+</ol>
+<h3 id="%F0%9F%93%8C-burp-suite-for-intercepting-httphttps">📌 Burp Suite (for Intercepting HTTP/HTTPS):</h3>
+<ol>
+<li>Set Burp Proxy → Browser → 127.0.0.1:8080</li>
+<li>Enable Intercept → Login to test site</li>
+<li>Modify POST data in Burp → Send to Repeater</li>
+<li>Try fake login, try SQLi payloads in POST data</li>
+</ol>
+<hr>
+<h2 id="%F0%9F%A7%A0-cheat-sheet-summary">🧠 Cheat Sheet Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Use</th>
+<th>Tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP</td>
+<td>Web request/response</td>
+<td>Browser, Wireshark</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>Secure HTTP</td>
+<td>SSL Certificates</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>Session/Preference</td>
+<td>DevTools, Burp</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>Data fetch</td>
+<td>Web page load</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>Data submit</td>
+<td>Forms, login</td>
+</tr>
+<tr>
+<td>Session Hijack</td>
+<td>Cookie theft</td>
+<td>XSS, MitM</td>
+</tr>
+<tr>
+<td>Modify Request</td>
+<td>Tampering</td>
+<td>Burp Suite, Postman</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%E2%9C%85-practice-task-for-you">✅ Practice Task for You</h2>
+<ul>
+<li>🔍 DevTools में जाओ – cookie और request header analyze करो</li>
+<li>📡 Burp Suite से HTTP request intercept करो</li>
+<li>🔐 Try to find missing cookie flags: HttpOnly, Secure</li>
+<li>✍️ POST request में username बदलकर देखो क्या होता है</li>
+<li>🕵️‍♂️ XSS injection try करो: <code>&lt;script&gt;alert(1)&lt;/script&gt;</code> comment box में</li>
+</ul>
+
+</body>
+</html>
