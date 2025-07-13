@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSS_Learning_Notes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%8E%A8-css-%E0%A4%95%E0%A5%80-%E0%A4%B8%E0%A4%AE%E0%A5%8D%E0%A4%AA%E0%A5%82%E0%A4%B0%E0%A5%8D%E0%A4%A3-%E0%A4%97%E0%A4%BE%E0%A4%87%E0%A4%A1-%E0%A4%B9%E0%A4%BF%E0%A4%82%E0%A4%A6%E0%A5%80-%E0%A4%AE%E0%A5%87%E0%A4%82-%E2%80%93-%E0%A4%B5%E0%A5%87%E0%A4%AC-%E0%A4%A1%E0%A5%87%E0%A4%B5%E0%A5%87%E0%A4%B2%E0%A4%AA%E0%A4%B0%E0%A5%8D%E0%A4%B8-%E0%A4%94%E0%A4%B0-%E0%A4%8F%E0%A4%A5%E0%A4%BF%E0%A4%95%E0%A4%B2-%E0%A4%B9%E0%A5%88%E0%A4%95%E0%A4%B0%E0%A5%8D%E0%A4%B8-%E0%A4%95%E0%A5%87-%E0%A4%B2%E0%A4%BF%E0%A4%8F">🎨 CSS की सम्पूर्ण गाइड (हिंदी में) – वेब डेवेलपर्स और एथिकल हैकर्स के लिए</h1>
+<hr>
+<h2 id="%F0%9F%93%98-%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AF-1-css-%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE-%E0%A4%B9%E0%A5%88">📘 अध्याय 1: CSS क्या है?</h2>
+<p><strong>CSS</strong> (Cascading Style Sheets) एक डिज़ाइन भाषा है जो HTML वेबपेज को सुंदर बनाने के लिए उपयोग होती है।</p>
+<p>👉 इससे आप कंट्रोल कर सकते हैं:</p>
+<ul>
+<li>टेक्स्ट का रंग, आकार और फ़ॉन्ट</li>
+<li>पृष्ठभूमि रंग और चित्र</li>
+<li>बॉर्डर, मार्जिन, पेडिंग</li>
+<li>लेआउट और रेस्पॉन्सिव डिज़ाइन</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%A7%A9-%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AF-2-css-%E0%A4%95%E0%A5%88%E0%A4%B8%E0%A5%87-%E0%A4%95%E0%A4%BE%E0%A4%AE-%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A4%BE-%E0%A4%B9%E0%A5%88">🧩 अध्याय 2: CSS कैसे काम करता है?</h2>
+<h3 id="%F0%9F%94%B9-3-%E0%A4%A4%E0%A4%B0%E0%A5%80%E0%A4%95%E0%A5%87-css-%E0%A4%B2%E0%A4%97%E0%A4%BE%E0%A4%A8%E0%A5%87-%E0%A4%95%E0%A5%87">🔹 3 तरीके CSS लगाने के:</h3>
+<table>
+<thead>
+<tr>
+<th>तरीका</th>
+<th>उदाहरण</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inline</td>
+<td><code>&lt;h1 style=&quot;color: red;&quot;&gt;Hello&lt;/h1&gt;</code></td>
+</tr>
+<tr>
+<td>Internal</td>
+<td><code>&lt;style&gt;h1 { color: red; }&lt;/style&gt;</code></td>
+</tr>
+<tr>
+<td>External</td>
+<td><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>✅ <strong>External CSS</strong> सबसे अच्छा तरीका है।</p>
+<hr>
+<h2 id="%F0%9F%A7%A0-%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AF-3-css-syntax">🧠 अध्याय 3: CSS Syntax</h2>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">selector</span> {
+  <span class="hljs-attribute">property</span>: value;
+}
+</div></code></pre>
+<p>उदाहरण:</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">h1</span> {
+  <span class="hljs-attribute">color</span>: blue;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">24px</span>;
+}
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%8E%AF-%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AF-4-css-selectors">🎯 अध्याय 4: CSS Selectors</h2>
+<table>
+<thead>
+<tr>
+<th>Selector</th>
+<th>उदाहरण</th>
+<th>काम</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td><code>* {}</code></td>
+<td>सभी एलिमेंट्स को चुनता है</td>
+</tr>
+<tr>
+<td>टैग</td>
+<td><code>p {}</code></td>
+<td>सभी <code>&lt;p&gt;</code> टैग</td>
+</tr>
+<tr>
+<td>क्लास</td>
+<td><code>.box {}</code></td>
+<td>class=&quot;box&quot; वाले</td>
+</tr>
+<tr>
+<td>ID</td>
+<td><code>#main {}</code></td>
+<td>id=&quot;main&quot; वाले</td>
+</tr>
+<tr>
+<td>ग्रुप</td>
+<td><code>h1, p {}</code></td>
+<td>दोनों को चुनें</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%8E%A8-%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AF-5-%E0%A4%B8%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%A8%E0%A5%8D%E0%A4%AF-css-properties">🎨 अध्याय 5: सामान्य CSS Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>काम</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>color</code></td>
+<td>टेक्स्ट का रंग</td>
+</tr>
+<tr>
+<td><code>background-color</code></td>
+<td>बैकग्राउंड का रंग</td>
+</tr>
+<tr>
+<td><code>font-size</code></td>
+<td>टेक्स्ट का आकार</td>
+</tr>
+<tr>
+<td><code>text-align</code></td>
+<td>टेक्स्ट को Center/Left</td>
+</tr>
+<tr>
+<td><code>border</code></td>
+<td>बॉर्डर देना</td>
+</tr>
+<tr>
+<td><code>margin</code></td>
+<td>बाहर की जगह</td>
+</tr>
+<tr>
+<td><code>padding</code></td>
+<td>अंदर की जगह</td>
+</tr>
+<tr>
+<td><code>width</code>, <code>height</code></td>
+<td>आकार देना</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%A7%B1-%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AF-6-box-model">🧱 अध्याय 6: Box Model</h2>
+<p>HTML एलिमेंट 4 स्तरों से घिरा होता है:</p>
+<pre class="hljs"><code><div>| Margin |
+| Border |
+| Padding |
+| Content |
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%93%A6-%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AF-7-layout-systems">📦 अध्याय 7: Layout Systems</h2>
+<h3 id="%F0%9F%94%B9-flexbox">🔹 Flexbox:</h3>
+<pre class="hljs"><code><div><span class="hljs-selector-class">.container</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">align-items</span>: center;
+}
+</div></code></pre>
+<h3 id="%F0%9F%94%B8-grid">🔸 Grid:</h3>
+<pre class="hljs"><code><div><span class="hljs-selector-class">.container</span> {
+  <span class="hljs-attribute">display</span>: grid;
+  <span class="hljs-attribute">grid-template-columns</span>: <span class="hljs-number">1</span>fr <span class="hljs-number">1</span>fr;
+}
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%93%B1-%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AF-8-responsive-design-media-query">📱 अध्याय 8: Responsive Design (Media Query)</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width:</span> <span class="hljs-number">600px</span>) {
+  <span class="hljs-selector-tag">body</span> {
+    <span class="hljs-attribute">background-color</span>: lightblue;
+  }
+}
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%A7%AA-%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AF-9-dummy-login-page-design-practice">🧪 अध्याय 9: Dummy Login Page Design (Practice)</h2>
+<h3 id="%F0%9F%93%84-html-indexhtml">📄 HTML (index.html)</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"hi"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Login Page<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"style.css"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"login-box"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>लॉग इन करें<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"यूज़रनेम"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"पासवर्ड"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#"</span>&gt;</span>पासवर्ड भूल गए?<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%8E%A8-css-stylecss">🎨 CSS (style.css)</h3>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">body</span> {
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">font-family</span>: Arial, sans-serif;
+  <span class="hljs-attribute">background</span>: <span class="hljs-number">#f0f2f5</span>;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;
+}
+
+<span class="hljs-selector-class">.login-box</span> {
+  <span class="hljs-attribute">background</span>: white;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">40px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">300px</span>;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">10px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.1</span>);
+  <span class="hljs-attribute">text-align</span>: center;
+}
+
+<span class="hljs-selector-class">.login-box</span> <span class="hljs-selector-tag">h2</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#333</span>;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">20px</span>;
+}
+
+<span class="hljs-selector-class">.login-box</span> <span class="hljs-selector-tag">input</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#ccc</span>;
+}
+
+<span class="hljs-selector-class">.login-box</span> <span class="hljs-selector-tag">button</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#4CAF50</span>;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+}
+
+<span class="hljs-selector-class">.login-box</span> <span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#45a049</span>;
+}
+
+<span class="hljs-selector-class">.login-box</span> <span class="hljs-selector-tag">a</span> {
+  <span class="hljs-attribute">text-decoration</span>: none;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#007BFF</span>;
+}
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%A7%A0-%E0%A4%85%E0%A4%A7%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AF-10-%E0%A4%89%E0%A4%AA%E0%A4%AF%E0%A5%8B%E0%A4%97%E0%A5%80-tips">🧠 अध्याय 10: उपयोगी Tips</h2>
+<ul>
+<li>HTML और CSS फ़ाइलों को एक ही फ़ोल्डर में रखें</li>
+<li>मोबाइल व्यू के लिए Media Query ज़रूर जोड़ें</li>
+<li>Ethical Hacking अभ्यास के लिए dummy pages का उपयोग करें (केवल ऑफलाइन)</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%98-extra-learning-coming-next">📘 Extra Learning (Coming Next)</h2>
+<table>
+<thead>
+<tr>
+<th>टॉपिक</th>
+<th>विवरण</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Animation</td>
+<td>CSS से स्लो/फेड इफेक्ट्स</td>
+</tr>
+<tr>
+<td>Hover Effects</td>
+<td>बटन पर माउस आने पर</td>
+</tr>
+<tr>
+<td>Pseudo Classes</td>
+<td><code>:hover</code>, <code>:nth-child</code></td>
+</tr>
+<tr>
+<td>CSS Variables</td>
+<td>Reusable वैल्यू</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%93%98-extra-learning-%E0%A4%8F%E0%A4%A1%E0%A4%B5%E0%A4%BE%E0%A4%82%E0%A4%B8-%E0%A4%9F%E0%A5%89%E0%A4%AA%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B8">📘 Extra Learning (एडवांस टॉपिक्स)</h2>
+<h3 id="%F0%9F%8E%9E%EF%B8%8F-1-animation-%E2%80%93-css-%E0%A4%B8%E0%A5%87-%E0%A4%B8%E0%A5%8D%E0%A4%B2%E0%A5%8B%E0%A4%AB%E0%A5%87%E0%A4%A1-%E0%A4%87%E0%A4%AB%E0%A5%87%E0%A4%95%E0%A5%8D%E0%A4%9F">🎞️ 1. Animation – CSS से स्लो/फेड इफेक्ट</h3>
+<p>CSS में आप किसी भी एलिमेंट को Move, Fade, Rotate आदि कर सकते हैं।</p>
+<p>🔹 उदाहरण:</p>
+<pre class="hljs"><code><div><span class="hljs-selector-class">.box</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">background</span>: red;
+  <span class="hljs-attribute">animation</span>: fadein <span class="hljs-number">2s</span> ease-in-out forwards;
+}
+
+<span class="hljs-keyword">@keyframes</span> fadein {
+  <span class="hljs-selector-tag">from</span> {
+    <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">20px</span>);
+  }
+  <span class="hljs-selector-tag">to</span> {
+    <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;
+    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">0</span>);
+  }
+}
+</div></code></pre>
+<p>👉 इसे HTML में ऐसे लागू करें:</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"box"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%96%B1%EF%B8%8F-2-hover-effects-%E2%80%93-%E0%A4%AC%E0%A4%9F%E0%A4%A8-%E0%A4%AA%E0%A4%B0-%E0%A4%AE%E0%A4%BE%E0%A4%89%E0%A4%B8-%E0%A4%86%E0%A4%A8%E0%A5%87-%E0%A4%AA%E0%A4%B0">🖱️ 2. Hover Effects – बटन पर माउस आने पर</h3>
+<p>जब माउस किसी बटन या डिव पर आता है, तब स्टाइल चेंज करना हो तो <code>:hover</code> उपयोग होता है।</p>
+<p>🔹 उदाहरण:</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">button</span> {
+  <span class="hljs-attribute">background-color</span>: green;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">transition</span>: background-color <span class="hljs-number">0.3s</span> ease;
+}
+
+<span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background-color</span>: darkgreen;
+}
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%A7%99%E2%80%8D%E2%99%82%EF%B8%8F-3-pseudo-classes-%E2%80%93-%E0%A4%B5%E0%A4%BF%E0%A4%B6%E0%A5%87%E0%A4%B7-selectors">🧙‍♂️ 3. Pseudo Classes – विशेष selectors</h3>
+<p>CSS में कुछ विशेष selectors होते हैं, जिन्हें <strong>Pseudo-classes</strong> कहा जाता है।</p>
+<table>
+<thead>
+<tr>
+<th>Pseudo Class</th>
+<th>उपयोग</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:hover</code></td>
+<td>माउस आने पर</td>
+</tr>
+<tr>
+<td><code>:first-child</code></td>
+<td>पहला child</td>
+</tr>
+<tr>
+<td><code>:last-child</code></td>
+<td>अंतिम child</td>
+</tr>
+<tr>
+<td><code>:nth-child(n)</code></td>
+<td>nth number पर</td>
+</tr>
+</tbody>
+</table>
+<p>🔹 उदाहरण:</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">ul</span> <span class="hljs-selector-tag">li</span><span class="hljs-selector-pseudo">:first-child</span> {
+  <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-selector-tag">ul</span> <span class="hljs-selector-tag">li</span><span class="hljs-selector-pseudo">:nth-child(2)</span> {
+  <span class="hljs-attribute">font-weight</span>: bold;
+}
+</div></code></pre>
+<hr>
+<h3 id="%F0%9F%A7%AE-4-css-variables-%E2%80%93-reusable-%E0%A4%B5%E0%A5%88%E0%A4%B2%E0%A5%8D%E0%A4%AF%E0%A5%82">🧮 4. CSS Variables – Reusable वैल्यू</h3>
+<p>Variables से आप एक ही वैल्यू को बार-बार उपयोग कर सकते हैं।</p>
+<p>🔹 डिफाइन करना:</p>
+<pre class="hljs"><code><div><span class="hljs-selector-pseudo">:root</span> {
+  <span class="hljs-attribute">--main-color</span>: <span class="hljs-number">#4CAF50</span>;
+  <span class="hljs-attribute">--padding</span>: <span class="hljs-number">12px</span>;
+}
+</div></code></pre>
+<p>🔹 उपयोग करना:</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">button</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">var</span>(--main-color);
+  <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">var</span>(--padding);
+}
+</div></code></pre>
+<p>📝 नोट: <code>:root</code> का मतलब HTML का root (global scope) है।</p>
+<hr>
+<hr>
+<h2 id="%F0%9F%A7%BE-%E0%A4%A8%E0%A4%BF%E0%A4%B7%E0%A5%8D%E0%A4%95%E0%A4%B0%E0%A5%8D%E0%A4%B7">🧾 निष्कर्ष</h2>
+<p>✅ अब आप:</p>
+<ul>
+<li>CSS लिखना और जोड़ना सीख गए</li>
+<li>Selectors, Properties और Box Model समझ गए</li>
+<li>Dummy login डिज़ाइन बनाना सीखा</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%A6-%E0%A4%AB%E0%A5%8B%E0%A4%B2%E0%A5%8D%E0%A4%A1%E0%A4%B0-%E0%A4%B8%E0%A5%8D%E0%A4%9F%E0%A5%8D%E0%A4%B0%E0%A4%95%E0%A5%8D%E0%A4%9A%E0%A4%B0">📦 फोल्डर स्ट्रक्चर</h2>
+<pre class="hljs"><code><div>project-folder/
+│
+├── index.html
+└── style.css
+</div></code></pre>
+<hr>
+<p>👨‍💻 बनाए रखा: Lucy (AI Hacking &amp; Coding Teacher)</p>
+
+</body>
+</html>

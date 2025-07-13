@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML_Learning.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%93%98-html-%E0%A4%AB%E0%A5%81%E0%A4%B2-%E0%A4%97%E0%A4%BE%E0%A4%87%E0%A4%A1-%E2%80%93-%E0%A4%B9%E0%A4%BF%E0%A4%82%E0%A4%A6%E0%A5%80-%E0%A4%AE%E0%A5%87%E0%A4%82-html-full-guide-in-hindi">📘 HTML फुल गाइड – हिंदी में (HTML Full Guide in Hindi)</h1>
+<p>यह गाइड HTML के सभी टैग्स, उनके प्रयोग और उदाहरणों को कवर करती है। इसमें पूरी Cheat Sheet, Dummy Login Page और प्रैक्टिस प्रोजेक्ट्स भी शामिल हैं।</p>
+<hr>
+<h2 id="%F0%9F%A7%BE-html-%E0%A4%9F%E0%A5%88%E0%A4%97%E0%A5%8D%E0%A4%B8-%E2%80%93-%E0%A4%A1%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A5%8D%E0%A4%B0%E0%A4%BF%E0%A4%AA%E0%A5%8D%E0%A4%B6%E0%A4%A8-%E0%A4%94%E0%A4%B0-%E0%A4%89%E0%A4%A6%E0%A4%BE%E0%A4%B9%E0%A4%B0%E0%A4%A3-%E0%A4%B8%E0%A4%B9%E0%A4%BF%E0%A4%A4-full-cheat-sheet">🧾 HTML टैग्स – डिस्क्रिप्शन और उदाहरण सहित (Full Cheat Sheet)</h2>
+<h3 id="%F0%9F%94%B9-doctype-%E2%80%93-html-%E0%A4%A1%E0%A5%89%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A5%81%E0%A4%AE%E0%A5%87%E0%A4%82%E0%A4%9F-%E0%A4%95%E0%A4%BE-%E0%A4%9F%E0%A4%BE%E0%A4%87%E0%A4%AA-%E0%A4%98%E0%A5%8B%E0%A4%B7%E0%A4%BF%E0%A4%A4-%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A4%BE-%E0%A4%B9%E0%A5%88">🔹 <code>&lt;!DOCTYPE&gt;</code> – HTML डॉक्युमेंट का टाइप घोषित करता है</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-html-%E2%80%93-html-%E0%A4%A1%E0%A5%89%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A5%81%E0%A4%AE%E0%A5%87%E0%A4%82%E0%A4%9F-%E0%A4%95%E0%A5%80-%E0%A4%B6%E0%A5%81%E0%A4%B0%E0%A5%81%E0%A4%86%E0%A4%A4-%E0%A4%94%E0%A4%B0-%E0%A4%85%E0%A4%82%E0%A4%A4-%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A4%BE-%E0%A4%B9%E0%A5%88">🔹 <code>&lt;html&gt;</code> – HTML डॉक्युमेंट की शुरुआत और अंत करता है</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  ...
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-head-%E2%80%93-%E0%A4%AE%E0%A5%87%E0%A4%9F%E0%A4%BE%E0%A4%A1%E0%A5%87%E0%A4%9F%E0%A4%BE-%E0%A4%9F%E0%A4%BE%E0%A4%87%E0%A4%9F%E0%A4%B2-cssjs-%E0%A4%B2%E0%A4%BF%E0%A4%82%E0%A4%95-%E0%A4%86%E0%A4%A6%E0%A4%BF-%E0%A4%95%E0%A5%8B-%E0%A4%B0%E0%A4%96%E0%A4%A4%E0%A4%BE-%E0%A4%B9%E0%A5%88">🔹 <code>&lt;head&gt;</code> – मेटाडेटा, टाइटल, CSS/JS लिंक आदि को रखता है</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>मेरा पेज<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-title-%E2%80%93-%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%89%E0%A4%9C%E0%A4%BC%E0%A4%B0-%E0%A4%9F%E0%A5%88%E0%A4%AC-%E0%A4%95%E0%A4%BE-%E0%A4%9F%E0%A4%BE%E0%A4%87%E0%A4%9F%E0%A4%B2-%E0%A4%B8%E0%A5%87%E0%A4%9F-%E0%A4%95%E0%A4%B0%E0%A4%A4%E0%A4%BE-%E0%A4%B9%E0%A5%88">🔹 <code>&lt;title&gt;</code> – ब्राउज़र टैब का टाइटल सेट करता है</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Welcome<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-body-%E2%80%93-%E0%A4%AA%E0%A5%87%E0%A4%9C-%E0%A4%95%E0%A4%BE-%E0%A4%A6%E0%A5%83%E0%A4%B6%E0%A5%8D%E0%A4%AF-%E0%A4%B9%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%B8%E0%A4%BE-%E0%A4%9C%E0%A5%8B-%E0%A4%A6%E0%A4%BF%E0%A4%96%E0%A4%A4%E0%A4%BE-%E0%A4%B9%E0%A5%88">🔹 <code>&lt;body&gt;</code> – पेज का दृश्य हिस्सा जो दिखता है</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>हैलो!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-h1-to-h6-%E2%80%93-%E0%A4%B9%E0%A5%87%E0%A4%A1%E0%A4%BF%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B8">🔹 <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> – हेडिंग्स</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>सबसे बड़ी हेडिंग<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h6</span>&gt;</span>सबसे छोटी हेडिंग<span class="hljs-tag">&lt;/<span class="hljs-name">h6</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-p-%E2%80%93-%E0%A4%AA%E0%A5%88%E0%A4%B0%E0%A4%BE%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%AB">🔹 <code>&lt;p&gt;</code> – पैराग्राफ</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>यह एक पैराग्राफ है।<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-br-%E2%80%93-%E0%A4%B2%E0%A4%BE%E0%A4%87%E0%A4%A8-%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%95">🔹 <code>&lt;br&gt;</code> – लाइन ब्रेक</h3>
+<pre class="hljs"><code><div>यह पहला लाइन<span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span>यह दूसरी लाइन
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-hr-%E2%80%93-%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A5%88%E0%A4%A4%E0%A4%BF%E0%A4%9C-%E0%A4%B2%E0%A4%BE%E0%A4%87%E0%A4%A8">🔹 <code>&lt;hr&gt;</code> – क्षैतिज लाइन</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>पहला<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">hr</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>दूसरा<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-a-%E2%80%93-%E0%A4%B9%E0%A4%BE%E0%A4%87%E0%A4%AA%E0%A4%B0%E0%A4%B2%E0%A4%BF%E0%A4%82%E0%A4%95">🔹 <code>&lt;a&gt;</code> – हाइपरलिंक</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span>क्लिक करें<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-img-%E2%80%93-%E0%A4%87%E0%A4%AE%E0%A5%87%E0%A4%9C-%E0%A4%9C%E0%A5%8B%E0%A4%A1%E0%A4%BC%E0%A5%87">🔹 <code>&lt;img&gt;</code> – इमेज जोड़े</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"img.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Image"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"200"</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-strong-em-u-%E2%80%93-%E0%A4%9F%E0%A5%87%E0%A4%95%E0%A5%8D%E0%A4%B8%E0%A5%8D%E0%A4%9F-%E0%A4%AB%E0%A5%89%E0%A4%B0%E0%A5%8D%E0%A4%AE%E0%A5%87%E0%A4%9F%E0%A4%BF%E0%A4%82%E0%A4%97">🔹 <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;u&gt;</code> – टेक्स्ट फॉर्मेटिंग</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Bold<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>Italic<span class="hljs-tag">&lt;/<span class="hljs-name">em</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">u</span>&gt;</span>Underline<span class="hljs-tag">&lt;/<span class="hljs-name">u</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-ul-ol-li-%E2%80%93-%E0%A4%B2%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%9F">🔹 <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code> – लिस्ट</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ol</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-table-tr-td-th-%E2%80%93-%E0%A4%9F%E0%A5%87%E0%A4%AC%E0%A4%B2">🔹 <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code>, <code>&lt;th&gt;</code> – टेबल</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">border</span>=<span class="hljs-string">"1"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>नाम<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>कक्षा<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>राम<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-form-input-textarea-button-%E2%80%93-%E0%A4%AB%E0%A5%89%E0%A4%B0%E0%A5%8D%E0%A4%AE-%E0%A4%8F%E0%A4%B2%E0%A4%BF%E0%A4%AE%E0%A5%87%E0%A4%82%E0%A4%9F%E0%A5%8D%E0%A4%B8">🔹 <code>&lt;form&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;button&gt;</code> – फॉर्म एलिमेंट्स</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"नाम"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">textarea</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>सबमिट<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-audio-video-%E2%80%93-%E0%A4%AE%E0%A5%80%E0%A4%A1%E0%A4%BF%E0%A4%AF%E0%A4%BE">🔹 <code>&lt;audio&gt;</code>, <code>&lt;video&gt;</code> – मीडिया</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">audio</span> <span class="hljs-attr">controls</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"audio.mp3"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">audio</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">controls</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"video.mp4"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">video</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-semantic-%E0%A4%9F%E0%A5%88%E0%A4%97%E0%A5%8D%E0%A4%B8-%E2%80%93-%E0%A4%B2%E0%A5%87%E0%A4%86%E0%A4%89%E0%A4%9F-%E0%A4%95%E0%A5%87-%E0%A4%B2%E0%A4%BF%E0%A4%8F">🔹 Semantic टैग्स – लेआउट के लिए</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>Header<span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>Menu<span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">main</span>&gt;</span>Main Content<span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">footer</span>&gt;</span>Footer<span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span>
+</div></code></pre>
+<h3 id="%F0%9F%94%B9-%E0%A4%85%E0%A4%A8%E0%A5%8D%E0%A4%AF-%E0%A4%9F%E0%A5%88%E0%A4%97%E0%A5%8D%E0%A4%B8">🔹 अन्य टैग्स:</h3>
+<ul>
+<li><code>&lt;span&gt;</code> – inline text wrapper</li>
+<li><code>&lt;div&gt;</code> – block container</li>
+<li><code>&lt;label&gt;</code> – form label</li>
+<li><code>&lt;select&gt;</code>, <code>&lt;option&gt;</code> – dropdown</li>
+</ul>
+<hr>
+<h2 id="%F0%9F%93%9D-%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A5%88%E0%A4%95%E0%A5%8D%E0%A4%9F%E0%A4%BF%E0%A4%B8-%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A5%8B%E0%A4%9C%E0%A5%87%E0%A4%95%E0%A5%8D%E0%A4%9F-%E0%A4%B6%E0%A5%80%E0%A4%9F-practice-projects">📝 प्रैक्टिस प्रोजेक्ट शीट (Practice Projects)</h2>
+<h3 id="%F0%9F%94%B8-beginner-projects">🔸 Beginner Projects:</h3>
+<ol>
+<li>Basic Resume</li>
+<li>Favorite Food List</li>
+<li>School Timetable Table</li>
+</ol>
+<h3 id="%F0%9F%94%B8-intermediate-projects">🔸 Intermediate Projects:</h3>
+<ol>
+<li>Personal Portfolio</li>
+<li>Contact Form Page</li>
+<li>Image Gallery Grid</li>
+</ol>
+<h3 id="%F0%9F%94%B8-dummy-login-page-practice">🔸 Dummy Login Page Practice</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"hi"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Fake Login Page<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+    <span class="hljs-selector-tag">body</span> {
+      <span class="hljs-attribute">background</span>: <span class="hljs-number">#e0e0e0</span>;
+      <span class="hljs-attribute">font-family</span>: Arial;
+      <span class="hljs-attribute">display</span>: flex;
+      <span class="hljs-attribute">justify-content</span>: center;
+      <span class="hljs-attribute">align-items</span>: center;
+      <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;
+    }
+    <span class="hljs-selector-class">.login-box</span> {
+      <span class="hljs-attribute">background</span>: white;
+      <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span>;
+      <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">8px</span>;
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">300px</span>;
+      <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">10px</span> <span class="hljs-number">#aaa</span>;
+    }
+    <span class="hljs-selector-tag">input</span> {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">93%</span>;
+      <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+      <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-selector-tag">button</span> {
+      <span class="hljs-attribute">background</span>: blue;
+      <span class="hljs-attribute">color</span>: white;
+      <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+      <span class="hljs-attribute">border</span>: none;
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+    }
+  </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"login-box"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Username"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Password"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<h2 id="%F0%9F%A7%BE-html-cheat-sheet-%E0%A4%9F%E0%A5%87%E0%A4%AC%E0%A4%B2-%E0%A4%AB%E0%A5%89%E0%A4%B0%E0%A5%8D%E0%A4%AE%E0%A5%87%E0%A4%9F-%E0%A4%AE%E0%A5%87%E0%A4%82">🧾 HTML Cheat Sheet (टेबल फॉर्मेट में)</h2>
+<table>
+<thead>
+<tr>
+<th>टैग</th>
+<th>विवरण (Description)</th>
+<th>उदाहरण (Code)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;!DOCTYPE&gt;</code></td>
+<td>HTML डॉक्युमेंट का टाइप घोषित करता है</td>
+<td><code>&lt;!DOCTYPE html&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;html&gt;</code></td>
+<td>HTML डॉक्युमेंट की शुरुआत करता है</td>
+<td><code>&lt;html lang=&quot;en&quot;&gt; ... &lt;/html&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;head&gt;</code></td>
+<td>मेटाडेटा, टाइटल, CSS/JS लिंक</td>
+<td><code>&lt;head&gt;&lt;title&gt;पेज&lt;/title&gt;&lt;/head&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;title&gt;</code></td>
+<td>ब्राउज़र टैब का नाम</td>
+<td><code>&lt;title&gt;मेरा पेज&lt;/title&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;body&gt;</code></td>
+<td>पेज का दृश्य भाग</td>
+<td><code>&lt;body&gt;...&lt;/body&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;h1&gt;</code>-<code>&lt;h6&gt;</code></td>
+<td>हेडिंग्स</td>
+<td><code>&lt;h1&gt;बड़ी हेडिंग&lt;/h1&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;p&gt;</code></td>
+<td>पैराग्राफ</td>
+<td><code>&lt;p&gt;यह एक पैराग्राफ है।&lt;/p&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;br&gt;</code></td>
+<td>लाइन ब्रेक</td>
+<td><code>यह पहला&lt;br&gt;दूसरा</code></td>
+</tr>
+<tr>
+<td><code>&lt;hr&gt;</code></td>
+<td>क्षैतिज रेखा</td>
+<td><code>&lt;hr&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;a&gt;</code></td>
+<td>लिंक बनाता है</td>
+<td><code>&lt;a href=&quot;https://&quot;&gt;क्लिक करें&lt;/a&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;img&gt;</code></td>
+<td>इमेज जोड़ता है</td>
+<td><code>&lt;img src=&quot;img.jpg&quot; alt=&quot;image&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;strong&gt;</code></td>
+<td>बोल्ड टेक्स्ट</td>
+<td><code>&lt;strong&gt;महत्वपूर्ण&lt;/strong&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;em&gt;</code></td>
+<td>इटैलिक टेक्स्ट</td>
+<td><code>&lt;em&gt;ज़ोर&lt;/em&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;u&gt;</code></td>
+<td>रेखांकित टेक्स्ट</td>
+<td><code>&lt;u&gt;रेखा&lt;/u&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;ul&gt;</code></td>
+<td>unordered list</td>
+<td><code>&lt;ul&gt;&lt;li&gt;आइटम&lt;/li&gt;&lt;/ul&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;ol&gt;</code></td>
+<td>ordered list</td>
+<td><code>&lt;ol&gt;&lt;li&gt;आइटम&lt;/li&gt;&lt;/ol&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;li&gt;</code></td>
+<td>लिस्ट का आइटम</td>
+<td><code>&lt;li&gt;समान&lt;/li&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;table&gt;</code></td>
+<td>टेबल बनाता है</td>
+<td><code>&lt;table&gt;...&lt;/table&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;tr&gt;</code></td>
+<td>टेबल रो</td>
+<td><code>&lt;tr&gt;...&lt;/tr&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;td&gt;</code></td>
+<td>टेबल डेटा सेल</td>
+<td><code>&lt;td&gt;डेटा&lt;/td&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;th&gt;</code></td>
+<td>टेबल हेडिंग</td>
+<td><code>&lt;th&gt;शीर्षक&lt;/th&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;form&gt;</code></td>
+<td>फॉर्म शुरू करता है</td>
+<td><code>&lt;form&gt;...&lt;/form&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;input&gt;</code></td>
+<td>इनपुट फील्ड</td>
+<td><code>&lt;input type=&quot;text&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;textarea&gt;</code></td>
+<td>मल्टीलाइन इनपुट</td>
+<td><code>&lt;textarea&gt;&lt;/textarea&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;button&gt;</code></td>
+<td>बटन</td>
+<td><code>&lt;button&gt;क्लिक&lt;/button&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;audio&gt;</code></td>
+<td>ऑडियो प्लेयर</td>
+<td><code>&lt;audio controls&gt;&lt;source src=&quot;file.mp3&quot;&gt;&lt;/audio&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;video&gt;</code></td>
+<td>वीडियो प्लेयर</td>
+<td><code>&lt;video controls&gt;&lt;source src=&quot;file.mp4&quot;&gt;&lt;/video&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;header&gt;</code></td>
+<td>पेज हेडर</td>
+<td><code>&lt;header&gt;...&lt;/header&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;nav&gt;</code></td>
+<td>नेविगेशन मेन्यू</td>
+<td><code>&lt;nav&gt;...&lt;/nav&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;main&gt;</code></td>
+<td>मुख्य कंटेंट</td>
+<td><code>&lt;main&gt;...&lt;/main&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;footer&gt;</code></td>
+<td>पेज फुटर</td>
+<td><code>&lt;footer&gt;...&lt;/footer&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;span&gt;</code></td>
+<td>inline text wrapper</td>
+<td><code>&lt;span&gt;टेक्स्ट&lt;/span&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;div&gt;</code></td>
+<td>ब्लॉक कंटेनर</td>
+<td><code>&lt;div&gt;सेक्शन&lt;/div&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;label&gt;</code></td>
+<td>फॉर्म लेबल</td>
+<td><code>&lt;label&gt;नाम:&lt;/label&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;select&gt;</code></td>
+<td>ड्रॉपडाउन</td>
+<td><code>&lt;select&gt;&lt;option&gt;1&lt;/option&gt;&lt;/select&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;option&gt;</code></td>
+<td>विकल्प</td>
+<td><code>&lt;option&gt;विकल्प&lt;/option&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>📌 यह एक dummy frontend login UI है। backend नहीं जोड़ा गया है।</p>
+<hr>
+<h2 id="%E2%9C%85-%E0%A4%B8%E0%A5%81%E0%A4%9D%E0%A4%BE%E0%A4%B5">✅ सुझाव:</h2>
+<ul>
+<li>VS Code + Live Server Plugin यूज़ करें</li>
+<li>खुद से हर टैग के 5-5 उदाहरण बनाएं</li>
+<li>एक फाइल में सभी टैग्स की डेमो बनाएं</li>
+</ul>
+<hr>
+<p>🎉 <strong>रोज़ थोड़ा सीखो, रोज़ थोड़ा बनाओ – आप ज़रूर मास्टर बनोगे!</strong></p>
+
+</body>
+</html>
