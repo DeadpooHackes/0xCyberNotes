@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Day1_Linux_FileSystem_Hindi.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%90%A7-linux-%E0%A4%AB%E0%A4%BC%E0%A4%BE%E0%A4%87%E0%A4%B2-%E0%A4%B8%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%9F%E0%A4%AE-linux-file-system-%E2%80%93-%E0%A4%B9%E0%A4%BF%E0%A4%A8%E0%A5%8D%E0%A4%A6%E0%A5%80-%E0%A4%AE%E0%A5%87%E0%A4%82-%E0%A4%AA%E0%A5%82%E0%A4%B0%E0%A5%8D%E0%A4%A3-%E0%A4%B5%E0%A4%BF%E0%A4%B5%E0%A4%B0%E0%A4%A3">🐧 Linux फ़ाइल सिस्टम (Linux File System) – हिन्दी में पूर्ण विवरण</h1>
+<p>Linux फ़ाइल सिस्टम एक संरचना है जो यह निर्धारित करती है कि फ़ाइलें और डाइरेक्टरीज़ डिस्क पर कैसे संग्रहित और व्यवस्थित होती हैं।</p>
+<hr>
+<h2 id="%F0%9F%94%B0-%E0%A4%B0%E0%A5%82%E0%A4%9F-%E0%A4%A1%E0%A4%BE%E0%A4%AF%E0%A4%B0%E0%A5%87%E0%A4%95%E0%A5%8D%E0%A4%9F%E0%A4%B0%E0%A5%80-%E2%80%93">🔰 रूट डायरेक्टरी – <code>/</code></h2>
+<p>Linux में फ़ाइल सिस्टम <code>/</code> से शुरू होता है, जिसे रूट डायरेक्टरी कहते हैं। बाकी सारी फ़ोल्डरें और फ़ाइलें इसी के अंदर होती हैं।</p>
+<hr>
+<h2 id="%F0%9F%93%81-%E0%A4%AE%E0%A5%81%E0%A4%96%E0%A5%8D%E0%A4%AF-%E0%A4%A1%E0%A4%BE%E0%A4%AF%E0%A4%B0%E0%A5%87%E0%A4%95%E0%A5%8D%E0%A4%9F%E0%A4%B0%E0%A5%80%E0%A4%9C%E0%A4%BC-%E0%A4%94%E0%A4%B0-%E0%A4%89%E0%A4%A8%E0%A4%95%E0%A4%BE-%E0%A4%89%E0%A4%AA%E0%A4%AF%E0%A5%8B%E0%A4%97">📁 मुख्य डायरेक्टरीज़ और उनका उपयोग</h2>
+<table>
+<thead>
+<tr>
+<th>डायरेक्टरी</th>
+<th>उपयोग</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/bin</code></td>
+<td>बेसिक कमांड्स जैसे <code>ls</code>, <code>cp</code>, <code>rm</code></td>
+</tr>
+<tr>
+<td><code>/boot</code></td>
+<td>बूट लोडर फाइल्स, <code>vmlinuz</code>, <code>grub</code></td>
+</tr>
+<tr>
+<td><code>/dev</code></td>
+<td>सभी डिवाइस फाइलें, जैसे <code>/dev/sda</code>, <code>/dev/null</code></td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td>सिस्टम की सभी configuration फाइलें</td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>सभी users की personal डायरेक्टरी</td>
+</tr>
+<tr>
+<td><code>/lib</code>, <code>/lib64</code></td>
+<td>जरूरी सिस्टम libraries</td>
+</tr>
+<tr>
+<td><code>/media</code>, <code>/mnt</code></td>
+<td>USB, CD-ROM जैसे external devices के लिए</td>
+</tr>
+<tr>
+<td><code>/opt</code></td>
+<td>Third-party software installation के लिए</td>
+</tr>
+<tr>
+<td><code>/proc</code></td>
+<td>वर्चुअल फाइल सिस्टम, प्रोसेस और kernel जानकारी</td>
+</tr>
+<tr>
+<td><code>/root</code></td>
+<td>Root user की होम डायरेक्टरी</td>
+</tr>
+<tr>
+<td><code>/run</code></td>
+<td>Runtime सिस्टम डेटा</td>
+</tr>
+<tr>
+<td><code>/sbin</code></td>
+<td>System level commands जैसे <code>reboot</code>, <code>shutdown</code></td>
+</tr>
+<tr>
+<td><code>/srv</code></td>
+<td>Server data (जैसे web server)</td>
+</tr>
+<tr>
+<td><code>/sys</code></td>
+<td>Kernel और hardware info</td>
+</tr>
+<tr>
+<td><code>/tmp</code></td>
+<td>Temporary files</td>
+</tr>
+<tr>
+<td><code>/usr</code></td>
+<td>User applications और प्रोग्राम्स</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>Log files, spool, cache, आदि</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%93%82-%E0%A4%A1%E0%A4%BE%E0%A4%AF%E0%A4%B0%E0%A5%87%E0%A4%95%E0%A5%8D%E0%A4%9F%E0%A4%B0%E0%A5%80-%E0%A4%9F%E0%A5%8D%E0%A4%B0%E0%A5%80-%E0%A4%89%E0%A4%A6%E0%A4%BE%E0%A4%B9%E0%A4%B0%E0%A4%A3">📂 डायरेक्टरी ट्री उदाहरण:</h2>
+<pre class="hljs"><code><div>/
+├── bin/
+├── boot/
+├── dev/
+├── etc/
+├── home/
+│   ├── rootpapa/
+│   └── guest/
+├── lib/
+├── media/
+├── mnt/
+├── opt/
+├── proc/
+├── root/
+├── run/
+├── sbin/
+├── srv/
+├── sys/
+├── tmp/
+├── usr/
+│   ├── bin/
+│   ├── lib/
+│   └── local/
+├── var/
+</div></code></pre>
+<hr>
+<h2 id="%F0%9F%A7%A0-%22everything-is-a-file%22-%E0%A4%B9%E0%A4%B0-%E0%A4%9A%E0%A5%80%E0%A4%9C%E0%A4%BC-%E0%A4%8F%E0%A4%95-%E0%A4%AB%E0%A4%BC%E0%A4%BE%E0%A4%87%E0%A4%B2-%E0%A4%B9%E0%A5%88">🧠 &quot;Everything is a File&quot; (हर चीज़ एक फ़ाइल है)</h2>
+<p>Linux में hardware, process, device — सब फ़ाइल की तरह दिखता है:</p>
+<table>
+<thead>
+<tr>
+<th>नाम</th>
+<th>क्या है</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/dev/sda</code></td>
+<td>हार्ड डिस्क</td>
+</tr>
+<tr>
+<td><code>/dev/null</code></td>
+<td>ब्लैक होल (डाटा फेंकने के लिए)</td>
+</tr>
+<tr>
+<td><code>/proc/cpuinfo</code></td>
+<td>CPU जानकारी</td>
+</tr>
+<tr>
+<td><code>/etc/passwd</code></td>
+<td>यूज़र अकाउंट्स</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%A7%BE-%E0%A4%85%E0%A4%A4%E0%A4%BF%E0%A4%B0%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%A4-%E0%A4%A1%E0%A4%BE%E0%A4%AF%E0%A4%B0%E0%A5%87%E0%A4%95%E0%A5%8D%E0%A4%9F%E0%A4%B0%E0%A5%80">🧾 अतिरिक्त डायरेक्टरी</h2>
+<table>
+<thead>
+<tr>
+<th>डायरेक्टरी</th>
+<th>उपयोग</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/lost+found</code></td>
+<td>Crash के बाद बची हुई फ़ाइलें</td>
+</tr>
+<tr>
+<td><code>/snap</code></td>
+<td>Snap पैकेज के लिए (Ubuntu में)</td>
+</tr>
+<tr>
+<td><code>/swapfile</code></td>
+<td>RAM की कमी होने पर इस्तेमाल होती है</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%F0%9F%93%8C-extra-concepts-%E0%A4%85%E0%A4%A4%E0%A4%BF%E0%A4%B0%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%A4-%E0%A4%9C%E0%A4%BE%E0%A4%A8%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%80">📌 Extra Concepts (अतिरिक्त जानकारी)</h2>
+<h3 id="%F0%9F%94%B8-%E0%A4%AB%E0%A4%BC%E0%A4%BE%E0%A4%87%E0%A4%B2-%E0%A4%B8%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%9F%E0%A4%AE-%E0%A4%9F%E0%A4%BE%E0%A4%87%E0%A4%AA%E0%A5%8D%E0%A4%B8">🔸 फ़ाइल सिस्टम टाइप्स</h3>
+<ul>
+<li><code>ext4</code> – सबसे कॉमन और fast फाइल सिस्टम</li>
+<li><code>ext3</code>, <code>ext2</code> – पुराने versions</li>
+<li><code>Btrfs</code>, <code>XFS</code>, <code>ZFS</code> – Advanced विकल्प</li>
+</ul>
+<h3 id="%F0%9F%94%B8-partitions-structure">🔸 Partitions Structure</h3>
+<ul>
+<li>अलग-अलग partition करना अच्छा होता है:
+<ul>
+<li><code>/</code> – रूट सिस्टम</li>
+<li><code>/home</code> – यूज़र डेटा</li>
+<li><code>/var</code> – logs और dynamic डेटा</li>
+<li><code>swap</code> – RAM backup</li>
+</ul>
+</li>
+</ul>
+<h3 id="%F0%9F%94%B8-mounting-commands">🔸 Mounting Commands</h3>
+<ul>
+<li><code>mount</code>, <code>umount</code> – फाइल सिस्टम माउंट/अनमाउंट करने के लिए</li>
+<li><code>df -h</code> – डिस्क यूसेज देखना</li>
+<li><code>lsblk</code> – block devices देखना</li>
+</ul>
+<h3 id="%F0%9F%94%B8-permissions--ownership">🔸 Permissions &amp; Ownership</h3>
+<ul>
+<li><code>chmod</code>, <code>chown</code>, <code>umask</code> – फ़ाइल permission को मैनेज करने के लिए</li>
+</ul>
+<h3 id="%F0%9F%94%B8-journaling-file-system">🔸 Journaling File System</h3>
+<ul>
+<li>Journaling से डेटा लॉस कम होता है; ext4 और btrfs में होता है।</li>
+</ul>
+<hr>
+<h2 id="%E2%9C%85-%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A4%BE%E0%A4%82%E0%A4%B6-%E0%A4%A4%E0%A4%BE%E0%A4%B2%E0%A4%BF%E0%A4%95%E0%A4%BE">✅ सारांश तालिका:</h2>
+<table>
+<thead>
+<tr>
+<th>डायरेक्टरी</th>
+<th>कार्य</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>रूट, सभी चीज़ों की जड़</td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>यूज़र फोल्डर</td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td>सेटिंग्स और config</td>
+</tr>
+<tr>
+<td><code>/bin</code></td>
+<td>आवश्यक कमांड्स</td>
+</tr>
+<tr>
+<td><code>/dev</code></td>
+<td>डिवाइस फ़ाइलें</td>
+</tr>
+<tr>
+<td><code>/proc</code></td>
+<td>सिस्टम प्रोसेस जानकारी</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>लॉग्स और चेंजिंग डेटा</td>
+</tr>
+<tr>
+<td><code>/tmp</code></td>
+<td>टेम्पररी फ़ाइल्स</td>
+</tr>
+<tr>
+<td><code>/usr</code></td>
+<td>सॉफ्टवेयर</td>
+</tr>
+<tr>
+<td><code>/boot</code></td>
+<td>बूट सिस्टम</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
